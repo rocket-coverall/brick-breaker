@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 5c319d714ee04634bad4409e903a38bd
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - extraBallPreFab: {fileID: 400000, guid: 734b009a37b00bf4381be768eca9aeba, type: 2}
+  - DeathZonesound: {fileID: 8300000, guid: 2ca56d9f7d1be634682f4b335ae6705c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 69d9d6f246459c443a1a63d85dbd8660
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - wallsound: {fileID: 8300000, guid: 636d4b419fce09d44b9f395672aa124f, type: 3}
+  - padsound: {fileID: 8300000, guid: 82f5170ba837b67449aa5354518b602e, type: 3}
+  - shootsound: {fileID: 8300000, guid: 7672c43dd66175a4f8581f6a4dd61cc6, type: 3}
+  - DeathZonesound: {fileID: 8300000, guid: 7ead450c01252d643a8b9fa33beb0bd4, type: 3}
+  - Bricksound: {fileID: 8300000, guid: 636d4b419fce09d44b9f395672aa124f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

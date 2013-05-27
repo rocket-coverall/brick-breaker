@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d495881cfa43c07408d4d46b5712d89b
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - powerUpPreFab: {fileID: 400000, guid: 3237ce822ce93cb4aad334201d67930d, type: 2}
+  - wallsound: {instanceID: 0}
+  - padsound: {instanceID: 0}
+  - shootsound: {instanceID: 0}
+  - DeathZonesound: {instanceID: 0}
+  - Bricksound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
