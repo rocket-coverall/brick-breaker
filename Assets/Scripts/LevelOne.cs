@@ -8,9 +8,13 @@ public class LevelOne : Level
 	public Transform extraBallPreFab;
 	public Transform prefabBrick;
 	public Transform powerUpPreFab;
-		
-	public float brickWidthGap = 0.1f;
-	public float brickHeightGap = 0.1f;
+	
+	//dimensions of brick will be defined by BrickArea dimensions and their amount and gaps
+	public int brickRows = 2;
+	public int brickColumns = 6;
+	
+	public float brickWidthGap = 0f;
+	public float brickHeightGap = 0f;
 	
 	AudioClip winning;
  	AudioClip losing;
@@ -26,29 +30,7 @@ public class LevelOne : Level
 		sphereScript = GameObject.Find("Sphere").GetComponent<SphereScript>();
 		cannon.SetActive(false);
 		
-//		int index = 0;
-//		float x = 0, z = 0;
-//		
-//		for(int i = 0; i < 3; i++)
-//		{
-//			for(int j = 0; j < 12; j++)
-//			{
-//				float yPos = 0;
-//				bricks[index] = (Transform)Instantiate(prefabBrick, new Vector3(x, yPos, z), new Quaternion(0,180,0,0));
-//				index++;
-//				//x += 3;
-//				print ("brick x dimensions" + prefabBrick.renderer.bounds.size.z);
-//				x += prefabBrick.renderer.bounds.size.x + brickWidthGap;
-//			}
-//			x=0;
-//			//z += -2;
-//			z -= prefabBrick.renderer.bounds.size.z + brickHeightGap;
-//		}
-		
-		
-		int brickRows = 3;
-		int brickColumns = 12;
-		
+				
 		GameObject brickArea = GameObject.Find("BrickArea");
 		
 		float brickWidth  = ( brickArea.renderer.bounds.size.x - brickWidthGap * (brickColumns - 1) ) / brickColumns;
@@ -76,14 +58,15 @@ public class LevelOne : Level
 			for(int j = 0; j < brickColumns; j++)
 			{
 				float yPos = 0;
+				
 				bricks[index] = (Transform)Instantiate(prefabBrick, new Vector3(x, yPos, z), new Quaternion(0,180,0,0));
+				bricks[index].localScale = new Vector3(brickWidth, bricks[index].localScale.y, brickHeight);
 				index++;
-				//x += 3;
-				//print ("brick x dimensions" + prefabBrick.renderer.bounds.size.z);
+
 				x +=  brickWidth + brickWidthGap;
 			}
-			x= bricksStart.x;
-			//z += -2;
+			x = bricksStart.x;// reset x bricks start to initial one
+
 			z -= brickHeight + brickHeightGap;
 		}
 		
