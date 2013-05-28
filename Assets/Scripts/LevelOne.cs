@@ -9,6 +9,9 @@ public class LevelOne : Level
 	public Transform prefabBrick;
 	public Transform powerUpPreFab;
 	
+	public float brickWidthGap = 0.1f;
+	public float brickHeightGap = 0.1f;
+	
 	AudioClip winning;
  	AudioClip losing;
  	bool won;	
@@ -24,7 +27,7 @@ public class LevelOne : Level
 		cannon.SetActive(false);
 		
 		int index = 0;
-		int x = 0, z = 0;
+		float x = 0, z = 0;
 		
 		for(int i = 0; i < 3; i++)
 		{
@@ -33,10 +36,13 @@ public class LevelOne : Level
 				float yPos = 0;
 				bricks[index] = (Transform)Instantiate(prefabBrick, new Vector3(x, yPos, z), new Quaternion(0,180,0,0));
 				index++;
-				x += 3;
+				//x += 3;
+				print ("brick x dimensions" + prefabBrick.renderer.bounds.size.z);
+				x += prefabBrick.renderer.bounds.size.x + brickWidthGap;
 			}
 			x=0;
-			z += -2;
+			//z += -2;
+			z -= prefabBrick.renderer.bounds.size.z + brickHeightGap;
 		}
 		_brickCounter = bricks.Length;
 		_count = 0;

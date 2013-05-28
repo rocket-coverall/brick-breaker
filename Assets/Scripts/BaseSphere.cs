@@ -87,12 +87,10 @@ public class BaseSphere : MonoBehaviour {
 		transform.position = stuckPos.position;
 	    transform.parent = stuckPos;
 		
-		rigidbody.velocity = Vector3.zero; //sometimes ball somehow has a non-zero velocity for rigidbody
+		rigidbody.velocity = Vector3.zero; //sometimes ball somehow has a non-zero velocity for rigidbody TODO this sometimes fails with a runtime exception
 		velocity = Vector3.zero;
 		
-	    stuck = true;
-		
-		
+	    stuck = true;	
 	}
 	
 	protected void LaunchSphere()
