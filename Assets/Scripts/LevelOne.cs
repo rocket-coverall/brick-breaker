@@ -9,8 +9,8 @@ public class LevelOne : Level
 	public Transform prefabBrick;
 	public Transform powerUpPreFab;
 	
-	public float brickWidthGap = 0.5f;
-	public float brickHeightGap = 0.5f;
+	public float brickWidthGap = 0.1f;
+	public float brickHeightGap = 0.1f;
 	
 	GameObject field;//for dimensions
 	
