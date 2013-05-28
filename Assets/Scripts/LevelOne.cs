@@ -8,11 +8,9 @@ public class LevelOne : Level
 	public Transform extraBallPreFab;
 	public Transform prefabBrick;
 	public Transform powerUpPreFab;
-	
+		
 	public float brickWidthGap = 0.1f;
 	public float brickHeightGap = 0.1f;
-	
-	GameObject field;//for dimensions
 	
 	AudioClip winning;
  	AudioClip losing;
@@ -28,26 +26,71 @@ public class LevelOne : Level
 		sphereScript = GameObject.Find("Sphere").GetComponent<SphereScript>();
 		cannon.SetActive(false);
 		
-		int index = 0;
-		float x = 0, z = 0;
+//		int index = 0;
+//		float x = 0, z = 0;
+//		
+//		for(int i = 0; i < 3; i++)
+//		{
+//			for(int j = 0; j < 12; j++)
+//			{
+//				float yPos = 0;
+//				bricks[index] = (Transform)Instantiate(prefabBrick, new Vector3(x, yPos, z), new Quaternion(0,180,0,0));
+//				index++;
+//				//x += 3;
+//				print ("brick x dimensions" + prefabBrick.renderer.bounds.size.z);
+//				x += prefabBrick.renderer.bounds.size.x + brickWidthGap;
+//			}
+//			x=0;
+//			//z += -2;
+//			z -= prefabBrick.renderer.bounds.size.z + brickHeightGap;
+//		}
 		
-		for(int i = 0; i < 3; i++)
+		
+		int brickRows = 3;
+		int brickColumns = 12;
+		
+		GameObject brickArea = GameObject.Find("BrickArea");
+		
+		float brickWidth  = ( brickArea.renderer.bounds.size.x - brickWidthGap * (brickColumns - 1) ) / brickColumns;
+		print (brickWidth);
+		
+		float brickHeight = ( brickArea.renderer.bounds.size.z - brickHeightGap * (brickRows - 1) ) / brickRows;
+		print (brickHeight);
+		
+		Vector3 bricksStart = new Vector3();
+		
+		bricksStart = brickArea.transform.position -  brickArea.renderer.bounds.size/2;
+		bricksStart.z = brickArea.transform.position.z +  brickArea.renderer.bounds.size.z/2;
+		
+		bricksStart.x += brickWidth / 2;
+		bricksStart.z -= brickHeight / 2;
+		
+		print (bricksStart);
+		
+		
+		int index = 0;
+		float x = bricksStart.x, z = bricksStart.z;
+		
+		for(int i = 0; i < brickRows; i++)
 		{
-			for(int j = 0; j < 12; j++)
+			for(int j = 0; j < brickColumns; j++)
 			{
 				float yPos = 0;
 				bricks[index] = (Transform)Instantiate(prefabBrick, new Vector3(x, yPos, z), new Quaternion(0,180,0,0));
 				index++;
 				//x += 3;
-				print ("brick x dimensions" + prefabBrick.renderer.bounds.size.z);
-				x += prefabBrick.renderer.bounds.size.x + brickWidthGap;
+				//print ("brick x dimensions" + prefabBrick.renderer.bounds.size.z);
+				x +=  brickWidth + brickWidthGap;
 			}
-			x=0;
+			x= bricksStart.x;
 			//z += -2;
-			z -= prefabBrick.renderer.bounds.size.z + brickHeightGap;
+			z -= brickHeight + brickHeightGap;
 		}
+		
+		
 		_brickCounter = bricks.Length;
 		_count = 0;
+		
 	}
 	
 	//PowerUp is called in PadScript, in the OnTriggerEnter function

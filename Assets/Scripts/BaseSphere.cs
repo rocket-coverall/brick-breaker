@@ -43,9 +43,9 @@ public class BaseSphere : MonoBehaviour {
 			
         }	  	
 	}
-	void LateUpdate(){
-		//_transform.Translate(velocity * Time.deltaTime);
-	}
+//	void LateUpdate(){
+//		//_transform.Translate(velocity * Time.deltaTime);
+//	}
 
 // seems to work much worse than SweepTest solution
 //	void OnCollisionEnter(Collision other)
