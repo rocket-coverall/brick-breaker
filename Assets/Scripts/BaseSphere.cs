@@ -37,42 +37,49 @@ public class BaseSphere : MonoBehaviour {
 	{
 		_transform.Translate(velocity * Time.deltaTime);
 
-//		RaycastHit hit;
-//		if (rigidbody.SweepTest (velocity, out hit,0.70f)) {
-//            SphereCollision(hit);
-//			
-//        }	  	
+		RaycastHit hit;
+		if (rigidbody.SweepTest (velocity, out hit,0.70f)) {
+            SphereCollision(hit);
+			
+        }	  	
 	}
 	void LateUpdate(){
 		//_transform.Translate(velocity * Time.deltaTime);
 	}
-	
-	void OnCollisionEnter(Collision other)
-	{
-		print ("Collision with"+other.gameObject.tag);
-		
-//		RaycastHit hit;
-//		Physics.Raycast(transform.position, velocity, out hit);
-//		SphereCollision(hit);
-//		if (rigidbody.SweepTest (velocity, out hit,0.70f)) {
-//            SphereCollision(hit);
-//        }	  
-		
-	    if(other.gameObject.CompareTag("Brick"))
-		{
-			SphereBounce(other.contacts[0].normal,Bricksound);
-	        Destroy(other.collider.gameObject);
-			level.HitBrick(transform.position);
-		}
-		else if(other.gameObject.CompareTag("Side"))
-    	{ 
-			SphereBounce(other.contacts[0].normal,wallsound);
-	    }
-		else if(other.gameObject.CompareTag("Pad"))
-		{
-			SphereBounce(other.contacts[0].normal,padsound);
-    	}
-	}
+
+// seems to work much worse than SweepTest solution
+//	void OnCollisionEnter(Collision other)
+//	{
+//		print ("Collision with"+other.gameObject.tag);
+//		
+////		RaycastHit hit;
+////		Physics.Raycast(transform.position, velocity, out hit);
+////		SphereCollision(hit);
+////		if (rigidbody.SweepTest (velocity, out hit,0.70f)) {
+////            SphereCollision(hit);
+////        }	  
+////		
+//		print ("Contact points amount " + other.contacts.Length);
+//		foreach (ContactPoint p in other.contacts)
+//		{
+//			Debug.DrawRay(other.contacts[0].point, other.contacts[0].normal, Color.red); 
+//		}
+//		
+//	    if(other.gameObject.CompareTag("Brick"))
+//		{
+//			SphereBounce(other.contacts[0].normal,Bricksound);
+//	        Destroy(other.collider.gameObject);
+//			level.HitBrick(transform.position);
+//		}
+//		else if(other.gameObject.CompareTag("Side"))
+//    	{ 
+//			SphereBounce(other.contacts[0].normal,wallsound);
+//	    }
+//		else if(other.gameObject.CompareTag("Pad"))
+//		{
+//			SphereBounce(other.contacts[0].normal,padsound);
+//    	}
+//	}
 	
 	public virtual void OnTriggerEnter(Collider other)
 	{
