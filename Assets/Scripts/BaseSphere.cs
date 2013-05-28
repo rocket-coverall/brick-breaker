@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class BaseSphere : MonoBehaviour {
 	
 	public float speed;
-	public float speedInc;
 	
 	public AudioClip wallsound;
 	public AudioClip padsound;
@@ -36,17 +35,43 @@ public class BaseSphere : MonoBehaviour {
 	// Update is called once per frame
 	public virtual void Update () 
 	{
-		
 		_transform.Translate(velocity * Time.deltaTime);
+
+//		RaycastHit hit;
+//		if (rigidbody.SweepTest (velocity, out hit,0.70f)) {
+//            SphereCollision(hit);
+//			
+//        }	  	
+	}
+	void LateUpdate(){
+		//_transform.Translate(velocity * Time.deltaTime);
+	}
+	
+	void OnCollisionEnter(Collision other)
+	{
+		print ("Collision with"+other.gameObject.tag);
 		
-		//RaycastHit hit;
-		/*if (rigidbody.SweepTest (velocity, out hit,0.70f)) {
-            SphereCollision(hit);
-			
-        }*/
+//		RaycastHit hit;
+//		Physics.Raycast(transform.position, velocity, out hit);
+//		SphereCollision(hit);
+//		if (rigidbody.SweepTest (velocity, out hit,0.70f)) {
+//            SphereCollision(hit);
+//        }	  
 		
-		
-	  	
+	    if(other.gameObject.CompareTag("Brick"))
+		{
+			SphereBounce(other.contacts[0].normal,Bricksound);
+	        Destroy(other.collider.gameObject);
+			level.HitBrick(transform.position);
+		}
+		else if(other.gameObject.CompareTag("Side"))
+    	{ 
+			SphereBounce(other.contacts[0].normal,wallsound);
+	    }
+		else if(other.gameObject.CompareTag("Pad"))
+		{
+			SphereBounce(other.contacts[0].normal,padsound);
+    	}
 	}
 	
 	public virtual void OnTriggerEnter(Collider other)
@@ -61,7 +86,10 @@ public class BaseSphere : MonoBehaviour {
 	{
 		transform.position = stuckPos.position;
 	    transform.parent = stuckPos;
+		
+		rigidbody.velocity = Vector3.zero; //sometimes ball somehow has a non-zero velocity for rigidbody
 		velocity = Vector3.zero;
+		
 	    stuck = true;
 		
 		
@@ -75,6 +103,7 @@ public class BaseSphere : MonoBehaviour {
 		velocity *= speed;
     	stuck = false;
 		
+		//rigidbody.velocity = velocity;
 		
 		audio.PlayOneShot(shootsound,0.5f);
 	}
@@ -86,14 +115,11 @@ public class BaseSphere : MonoBehaviour {
 		velocity = velocity - 2 * norm * Vector3.Dot(velocity, norm);
     	velocity.y = 0;
 		velocity.Normalize();
-		speed += speedInc;
 		velocity = velocity * speed;
 		audio.PlayOneShot(audioClip,0.5f);
-		
 	}
 	
 	
-	/*
 	void SphereCollision(RaycastHit hit) //this is called in the Update
 	{
 		if(hit.collider.CompareTag("Side"))
@@ -111,7 +137,6 @@ public class BaseSphere : MonoBehaviour {
 			level.HitBrick(transform.position);
     	}
 	}
-	*/
 	
 	protected void MineSweeper()
 	{

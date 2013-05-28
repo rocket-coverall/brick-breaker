@@ -7,18 +7,21 @@ public class SphereScript : BaseSphere {
 
 	public override void Start () 
 	{
-		
 		base.Start ();
 	}
 	
 	
-	 public void Update()
+	 public override void Update()
 	{
 		#if UNITY_EDITOR
 		    if(Input.GetMouseButtonDown(1) && stuck == true)
 			{
 				LaunchSphere();
 	        } 
+			if(Input.GetKeyUp(KeyCode.Space))
+			{
+				BallStuck();
+			}
 		#endif	
 		
 		#if UNITY_ANDROID
@@ -28,7 +31,7 @@ public class SphereScript : BaseSphere {
 			}
 		#endif
 		base.Update ();
-		MineSweeper();
+		//MineSweeper();
 	}
 	
 
